@@ -23,5 +23,36 @@ function Contact() {
         );
     }
 
-    const
+    const handleChange = (e) => {
+        if (e.target.name === 'email') {
+            const isValid = validateEmail(e.target.value);
+            if (!isValid) {
+              setErrorMessage('Your email is invalid.');
+            } else {
+              setErrorMessage('');
+            }
+          } else {
+            if (!e.target.value.length) {
+              setErrorMessage(`A ${e.target.name} is required.`);
+            } else {
+              setErrorMessage('');
+            }
+          }
+          if (!errorMessage) {
+            setFormState({ ...formState, [e.target.name]: e.target.value });
+            console.log('Handle Form', formState);
+        }
+    };
+
+    return (
+        <div>
+            <p className="content is-medium"> Contact</p>
+            <hr />
+            <form id= "contact-form" onSubmit={handleSubmit}>
+                <div className="field">
+                    <label className="label" htmlFor="name"> Name</label>
+                </div>
+            </form>
+        </div>
+    )
 }
